@@ -1,24 +1,35 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Plantilla 1 - Creación de una instancia EC2 con Elastic IP (Lab15)",
+  "Description": "Plantilla 1 - EC2 con Elastic IP (KeyPair y Security Group como parámetros)",
+  
+  "Parameters": {
+    "KeyName": {
+      "Description": "Nombre del KeyPair existente",
+      "Type": "AWS::EC2::KeyPair::KeyName"
+    },
+    "SecurityGroupId": {
+      "Description": "ID del Security Group existente",
+      "Type": "AWS::EC2::SecurityGroup::Id"
+    }
+  },
+
   "Resources": {
     "Instancia3": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
         "ImageId": "ami-0885b1f6bd170450c",
         "InstanceType": "t2.micro",
-        "KeyName": "key",
+        "KeyName": { "Ref": "KeyName" },
         "SecurityGroupIds": [
-          "sg-0b5b241fca52ea5ed"
+          { "Ref": "SecurityGroupId" }
         ]
       }
     },
+
     "ElasticIP3": {
       "Type": "AWS::EC2::EIP",
       "Properties": {
-        "InstanceId": {
-          "Ref": "Instancia3"
-        }
+        "InstanceId": { "Ref": "Instancia3" }
       }
     }
   }
