@@ -17,7 +17,7 @@
     "Instancia3": {
       "Type": "AWS::EC2::Instance",
       "Properties": {
-        "ImageId": "ami-0885b1f6bd170450c",
+        "ImageId": "ami-0fb653ca2d3203ac1",
         "InstanceType": "t2.micro",
         "KeyName": { "Ref": "KeyName" },
         "SecurityGroupIds": [
